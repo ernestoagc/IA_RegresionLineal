@@ -128,11 +128,25 @@ namespace WFRegresionLineal
 
             RegistroBE registroBE = new RegistroBE();
             registroBE.PRODUCTO_CODIGO = Convert.ToInt32(cmbProducto.SelectedValue);
+            registroBE.PRODUCTO = ((ParametroBE)cmbProducto.SelectedItem).NOMBRE;
+
             registroBE.BANCA_CODIGO = Convert.ToInt32(cmbBanca.SelectedValue);
+            registroBE.BANCA = ((ParametroBE)cmbBanca.SelectedItem).NOMBRE;
+
             registroBE.MONEDA_CODIGO = Convert.ToInt32(cmbMoneda.SelectedValue);
+            registroBE.MONEDA = ((ParametroBE)cmbMoneda.SelectedItem).NOMBRE;
+
             registroBE.TIPO_DOCUMENTO_CODIGO = Convert.ToInt32(cmbTipoDocumento.SelectedValue);
+            registroBE.TIPO_DOCUMENTO = ((ParametroBE)cmbTipoDocumento.SelectedItem).NOMBRE;
+
+
             registroBE.TIPO_PLAZO_CODIGO = Convert.ToInt32(cmbTipoPlazo.SelectedValue);
+            registroBE.TIPO_PLAZO = ((ParametroBE)cmbTipoPlazo.SelectedItem).NOMBRE;
+
+
             registroBE.GARANTIA_CODIGO = Convert.ToInt32(cmbGarantia.SelectedValue);
+            registroBE.GARANTIA = ((ParametroBE)cmbGarantia.SelectedItem).NOMBRE;
+
             registroBE.IMPORTE= Convert.ToInt32(txtImporte.Text);
             registroBE.PLAZO = Convert.ToInt32(txtPlazo.Text);
             registroBE.NRO_FAMILIA = Convert.ToInt32(txtNumeroFamilia.Text);
@@ -188,8 +202,30 @@ namespace WFRegresionLineal
 
 
             listaRegistro.Add(registroBE);
-            gvDatos.DataSource = listaRegistro;
-            
+            DataTable dtRespuesta=  Helper.UtilFunction.ConvertToDatatable(listaRegistro);
+
+            dtRespuesta.Columns.Remove("PRODUCTO_CODIGO");
+            dtRespuesta.Columns.Remove("PRODUCTO_VALOR");
+            dtRespuesta.Columns.Remove("MONEDA_CODIGO");
+            dtRespuesta.Columns.Remove("MONEDA_VALOR");
+            dtRespuesta.Columns.Remove("IMPORTE_VALOR");
+            dtRespuesta.Columns.Remove("TIPO_PLAZO_CODIGO");
+            dtRespuesta.Columns.Remove("TIPO_PLAZO_VALOR");
+
+            dtRespuesta.Columns.Remove("PLAZO_VALOR");
+            dtRespuesta.Columns.Remove("GARANTIA_CODIGO");
+            dtRespuesta.Columns.Remove("GARANTIA_VALOR");
+            dtRespuesta.Columns.Remove("TIPO_DOCUMENTO_CODIGO");
+            dtRespuesta.Columns.Remove("TIPO_DOCUMENTO_VALOR");
+
+            dtRespuesta.Columns.Remove("NRO_FAMILIA_VALOR");
+            dtRespuesta.Columns.Remove("BANCA_CODIGO");
+            dtRespuesta.Columns.Remove("BANCA_VALOR");
+            dtRespuesta.Columns.Remove("INTERCEPTO");
+
+
+            gvDatos.DataSource = dtRespuesta;
+            //gvDatos.Update();
             var ook = gvEstadistica;
             string fuente = "";
         }

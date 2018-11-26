@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,6 +67,8 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.gvArchivo = new System.Windows.Forms.DataGridView();
             this.gvEstadistica = new System.Windows.Forms.DataGridView();
+            this.utilFunctionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.utilFunctionBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvDatos)).BeginInit();
             this.panel2.SuspendLayout();
@@ -76,6 +79,8 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvArchivo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvEstadistica)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.utilFunctionBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.utilFunctionBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -446,6 +451,14 @@
             this.gvEstadistica.Size = new System.Drawing.Size(1162, 233);
             this.gvEstadistica.TabIndex = 0;
             // 
+            // utilFunctionBindingSource
+            // 
+            this.utilFunctionBindingSource.DataSource = typeof(Helper.UtilFunction);
+            // 
+            // utilFunctionBindingSource1
+            // 
+            this.utilFunctionBindingSource1.DataSource = typeof(Helper.UtilFunction);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -476,6 +489,8 @@
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvArchivo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvEstadistica)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.utilFunctionBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.utilFunctionBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -521,6 +536,8 @@
         private System.Windows.Forms.DataGridView gvArchivo;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView gvEstadistica;
+        private System.Windows.Forms.BindingSource utilFunctionBindingSource;
+        private System.Windows.Forms.BindingSource utilFunctionBindingSource1;
     }
 }
 
