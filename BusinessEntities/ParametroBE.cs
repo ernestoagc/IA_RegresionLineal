@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BusinessEntities
 {
-	public class ArchivoBE
-	{
+    public class ParametroBE
+    {
         public string TITULO { get; set; }
         public string CODIGO { get; set; }
         public string NOMBRE { get; set; }
