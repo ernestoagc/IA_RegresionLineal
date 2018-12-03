@@ -56,7 +56,7 @@ namespace Helper
         {
             List<ParametroBE> resultado = new List<ParametroBE>();
             resultado.Add(getParametro(Constante.TIPO_PLAZO.DIA_CODIGO, Constante.TIPO_PLAZO.DIA));
-            resultado.Add(getParametro(Constante.TIPO_PLAZO.MES_CODIGO, Constante.TIPO_PLAZO.MES_CODIGO));
+            resultado.Add(getParametro(Constante.TIPO_PLAZO.MES_CODIGO, Constante.TIPO_PLAZO.MES));
 
             return resultado;
         }

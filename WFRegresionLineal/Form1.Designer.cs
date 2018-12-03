@@ -36,9 +36,9 @@
             this.gvDatos = new System.Windows.Forms.DataGridView();
             this.openfd = new System.Windows.Forms.OpenFileDialog();
             this.txtExaminar = new System.Windows.Forms.TextBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnProcesar = new System.Windows.Forms.Button();
             this.cmbTipoPlazo = new System.Windows.Forms.ComboBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -58,27 +58,23 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtImporte = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnProcesar = new System.Windows.Forms.Button();
-            this.label14 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabHistorica = new System.Windows.Forms.TabPage();
             this.gvArchivo = new System.Windows.Forms.DataGridView();
+            this.tabEstadistica = new System.Windows.Forms.TabPage();
             this.gvEstadistica = new System.Windows.Forms.DataGridView();
+            this.tabTasa = new System.Windows.Forms.TabPage();
             this.utilFunctionBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.utilFunctionBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvDatos)).BeginInit();
             this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabHistorica.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvArchivo)).BeginInit();
+            this.tabEstadistica.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvEstadistica)).BeginInit();
+            this.tabTasa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.utilFunctionBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.utilFunctionBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -142,25 +138,6 @@
             this.txtExaminar.Size = new System.Drawing.Size(176, 20);
             this.txtExaminar.TabIndex = 4;
             // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "PRODUCTO",
-            "MONEDA",
-            "IMPORTE",
-            "TIPO_PLAZO",
-            "PLAZO",
-            "GARANTIA",
-            "SEGMENTO",
-            "TIPO_DOCUMENTO",
-            "NRO_FAMILIA",
-            "BANCA"});
-            this.checkedListBox1.Location = new System.Drawing.Point(7, 27);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(186, 154);
-            this.checkedListBox1.TabIndex = 6;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -198,6 +175,17 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(739, 185);
             this.panel2.TabIndex = 9;
+            // 
+            // btnProcesar
+            // 
+            this.btnProcesar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProcesar.Location = new System.Drawing.Point(373, 10);
+            this.btnProcesar.Name = "btnProcesar";
+            this.btnProcesar.Size = new System.Drawing.Size(127, 27);
+            this.btnProcesar.TabIndex = 33;
+            this.btnProcesar.Text = "Ejecutar Proceso";
+            this.btnProcesar.UseVisualStyleBackColor = true;
+            this.btnProcesar.Click += new System.EventHandler(this.btnProcesar_Click);
             // 
             // cmbTipoPlazo
             // 
@@ -361,79 +349,27 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "MONEDA";
             // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.NavajoWhite;
-            this.panel3.Controls.Add(this.label14);
-            this.panel3.Controls.Add(this.checkedListBox1);
-            this.panel3.Location = new System.Drawing.Point(818, 106);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(345, 185);
-            this.panel3.TabIndex = 10;
-            // 
-            // btnProcesar
-            // 
-            this.btnProcesar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProcesar.Location = new System.Drawing.Point(373, 10);
-            this.btnProcesar.Name = "btnProcesar";
-            this.btnProcesar.Size = new System.Drawing.Size(127, 27);
-            this.btnProcesar.TabIndex = 33;
-            this.btnProcesar.Text = "Ejecutar Proceso";
-            this.btnProcesar.UseVisualStyleBackColor = true;
-            this.btnProcesar.Click += new System.EventHandler(this.btnProcesar_Click);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(3, 7);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(154, 20);
-            this.label14.TabIndex = 33;
-            this.label14.Text = "CALCULAR TASA";
-            // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabHistorica);
+            this.tabControl1.Controls.Add(this.tabEstadistica);
+            this.tabControl1.Controls.Add(this.tabTasa);
             this.tabControl1.Location = new System.Drawing.Point(12, 307);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1176, 316);
             this.tabControl1.TabIndex = 11;
             // 
-            // tabPage1
+            // tabHistorica
             // 
-            this.tabPage1.Controls.Add(this.gvDatos);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1168, 290);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Tasa";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.gvArchivo);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1168, 290);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Fuente Historica";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.gvEstadistica);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1168, 290);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Estadistica";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabHistorica.Controls.Add(this.gvArchivo);
+            this.tabHistorica.Location = new System.Drawing.Point(4, 22);
+            this.tabHistorica.Name = "tabHistorica";
+            this.tabHistorica.Padding = new System.Windows.Forms.Padding(3);
+            this.tabHistorica.Size = new System.Drawing.Size(1168, 290);
+            this.tabHistorica.TabIndex = 1;
+            this.tabHistorica.Text = "Fuente Historica";
+            this.tabHistorica.UseVisualStyleBackColor = true;
             // 
             // gvArchivo
             // 
@@ -443,13 +379,34 @@
             this.gvArchivo.Size = new System.Drawing.Size(1149, 278);
             this.gvArchivo.TabIndex = 0;
             // 
+            // tabEstadistica
+            // 
+            this.tabEstadistica.Controls.Add(this.gvEstadistica);
+            this.tabEstadistica.Location = new System.Drawing.Point(4, 22);
+            this.tabEstadistica.Name = "tabEstadistica";
+            this.tabEstadistica.Size = new System.Drawing.Size(1168, 290);
+            this.tabEstadistica.TabIndex = 2;
+            this.tabEstadistica.Text = "Estadistica";
+            this.tabEstadistica.UseVisualStyleBackColor = true;
+            // 
             // gvEstadistica
             // 
             this.gvEstadistica.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvEstadistica.Location = new System.Drawing.Point(3, 3);
             this.gvEstadistica.Name = "gvEstadistica";
-            this.gvEstadistica.Size = new System.Drawing.Size(1162, 233);
+            this.gvEstadistica.Size = new System.Drawing.Size(1162, 274);
             this.gvEstadistica.TabIndex = 0;
+            // 
+            // tabTasa
+            // 
+            this.tabTasa.Controls.Add(this.gvDatos);
+            this.tabTasa.Location = new System.Drawing.Point(4, 22);
+            this.tabTasa.Name = "tabTasa";
+            this.tabTasa.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTasa.Size = new System.Drawing.Size(1168, 290);
+            this.tabTasa.TabIndex = 0;
+            this.tabTasa.Text = "Tasa";
+            this.tabTasa.UseVisualStyleBackColor = true;
             // 
             // utilFunctionBindingSource
             // 
@@ -466,7 +423,6 @@
             this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(1200, 700);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.txtExaminar);
             this.Controls.Add(this.btnExaminar);
@@ -481,14 +437,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvDatos)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
+            this.tabHistorica.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvArchivo)).EndInit();
+            this.tabEstadistica.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvEstadistica)).EndInit();
+            this.tabTasa.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.utilFunctionBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.utilFunctionBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -505,7 +459,6 @@
         private System.Windows.Forms.DataGridView gvDatos;
 		private System.Windows.Forms.OpenFileDialog openfd;
 		private System.Windows.Forms.TextBox txtExaminar;
-		private System.Windows.Forms.CheckedListBox checkedListBox1;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.ComboBox cmbMoneda;
@@ -526,15 +479,13 @@
 		private System.Windows.Forms.ComboBox cmbTipoDocumento;
 		private System.Windows.Forms.Label label11;
 		private System.Windows.Forms.ComboBox cmbGarantia;
-		private System.Windows.Forms.Panel panel3;
 		private System.Windows.Forms.Button btnProcesar;
-		private System.Windows.Forms.Label label14;
 		private System.Windows.Forms.ComboBox cmbTipoPlazo;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabTasa;
+        private System.Windows.Forms.TabPage tabHistorica;
         private System.Windows.Forms.DataGridView gvArchivo;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabEstadistica;
         private System.Windows.Forms.DataGridView gvEstadistica;
         private System.Windows.Forms.BindingSource utilFunctionBindingSource;
         private System.Windows.Forms.BindingSource utilFunctionBindingSource1;

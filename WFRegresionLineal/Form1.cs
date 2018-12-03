@@ -87,8 +87,6 @@ namespace WFRegresionLineal
 				{
 					txtExaminar.Text = openfd.FileName;
                     leerExcel(openfd.FileName);
-                    //dtArchivo = ReadCvs(openfd.FileName);
-                    //gvDatos.DataSource = dtArchivo;
                     MessageBox.Show("Se cargo el archivo de forma exitosa", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
 			}
@@ -125,33 +123,46 @@ namespace WFRegresionLineal
 		private void btnAgregar_Click(object sender, EventArgs e)
 		{
 
+            if (proceso)
+            {
+                tabControl1.SelectedIndex = 2;
+                RegistroBE registroBE = new RegistroBE();
+                registroBE.PRODUCTO_CODIGO = Convert.ToInt32(cmbProducto.SelectedValue);
+                registroBE.PRODUCTO = ((ParametroBE)cmbProducto.SelectedItem).NOMBRE;
 
-            RegistroBE registroBE = new RegistroBE();
-            registroBE.PRODUCTO_CODIGO = Convert.ToInt32(cmbProducto.SelectedValue);
-            registroBE.PRODUCTO = ((ParametroBE)cmbProducto.SelectedItem).NOMBRE;
+                registroBE.BANCA_CODIGO = Convert.ToInt32(cmbBanca.SelectedValue);
+                registroBE.BANCA = ((ParametroBE)cmbBanca.SelectedItem).NOMBRE;
 
-            registroBE.BANCA_CODIGO = Convert.ToInt32(cmbBanca.SelectedValue);
-            registroBE.BANCA = ((ParametroBE)cmbBanca.SelectedItem).NOMBRE;
+                registroBE.MONEDA_CODIGO = Convert.ToInt32(cmbMoneda.SelectedValue);
+                registroBE.MONEDA = ((ParametroBE)cmbMoneda.SelectedItem).NOMBRE;
 
-            registroBE.MONEDA_CODIGO = Convert.ToInt32(cmbMoneda.SelectedValue);
-            registroBE.MONEDA = ((ParametroBE)cmbMoneda.SelectedItem).NOMBRE;
-
-            registroBE.TIPO_DOCUMENTO_CODIGO = Convert.ToInt32(cmbTipoDocumento.SelectedValue);
-            registroBE.TIPO_DOCUMENTO = ((ParametroBE)cmbTipoDocumento.SelectedItem).NOMBRE;
-
-
-            registroBE.TIPO_PLAZO_CODIGO = Convert.ToInt32(cmbTipoPlazo.SelectedValue);
-            registroBE.TIPO_PLAZO = ((ParametroBE)cmbTipoPlazo.SelectedItem).NOMBRE;
+                registroBE.TIPO_DOCUMENTO_CODIGO = Convert.ToInt32(cmbTipoDocumento.SelectedValue);
+                registroBE.TIPO_DOCUMENTO = ((ParametroBE)cmbTipoDocumento.SelectedItem).NOMBRE;
 
 
-            registroBE.GARANTIA_CODIGO = Convert.ToInt32(cmbGarantia.SelectedValue);
-            registroBE.GARANTIA = ((ParametroBE)cmbGarantia.SelectedItem).NOMBRE;
+                registroBE.TIPO_PLAZO_CODIGO = Convert.ToInt32(cmbTipoPlazo.SelectedValue);
+                registroBE.TIPO_PLAZO = ((ParametroBE)cmbTipoPlazo.SelectedItem).NOMBRE;
 
-            registroBE.IMPORTE= Convert.ToInt32(txtImporte.Text);
-            registroBE.PLAZO = Convert.ToInt32(txtPlazo.Text);
-            registroBE.NRO_FAMILIA = Convert.ToInt32(txtNumeroFamilia.Text);
 
-            agregarRegistro(registroBE);
+                registroBE.GARANTIA_CODIGO = Convert.ToInt32(cmbGarantia.SelectedValue);
+                registroBE.GARANTIA = ((ParametroBE)cmbGarantia.SelectedItem).NOMBRE;
+
+                registroBE.IMPORTE = Convert.ToInt32(txtImporte.Text);
+                registroBE.PLAZO = Convert.ToInt32(txtPlazo.Text);
+                registroBE.NRO_FAMILIA = Convert.ToInt32(txtNumeroFamilia.Text);
+
+                agregarRegistro(registroBE);
+                MessageBox.Show("Se realizo el cálculo de tasa", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            else {
+
+                MessageBox.Show("Debe de ejecutar el proceso antes de realizar el calculo de la tasa", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+
+            }
+
+
         }
 
         private void agregarRegistro(RegistroBE registroBE) {
@@ -232,9 +243,16 @@ namespace WFRegresionLineal
 
         private void leerExcel(string archivo) {
             ExcelReader db = new ExcelReader(archivo, true, false);
-            string hoja = "DATOS";
-            sourceTable = db.GetWorksheet(hoja);
-            gvArchivo.DataSource = sourceTable;
+            HojaSeleccion t = new HojaSeleccion(db.GetWorksheetList());
+
+            if (t.ShowDialog(this) == DialogResult.OK)
+            {
+                string hoja = t.Selection;
+                sourceTable = db.GetWorksheet(hoja);
+                gvArchivo.DataSource = sourceTable;
+            }
+               
+
         }
 
         private void btnProcesar_Click(object sender, EventArgs e)
@@ -243,36 +261,51 @@ namespace WFRegresionLineal
         }
 
 		private void Procesar() {
+            try {
+                if (gvArchivo.Rows.Count == 0) {
 
-            string[] independentNames = Helper.UtilFunction.getVariablesIndependientesDefecto();
-            string dependentName = Helper.UtilFunction.getVariableDependienteDefecto();
+                    MessageBox.Show("Primero se debe realizar la carga de datos históricos", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-            DataTable independent = sourceTable.DefaultView.ToTable(false, independentNames);
-            DataTable dependent = sourceTable.DefaultView.ToTable(false, dependentName);
+                    return;
+                }
 
-            inputs = independent.ToJagged();
-            outputs = dependent.Columns[dependentName].ToArray();
+                tabControl1.SelectedIndex = 1;
+                string[] independentNames = Helper.UtilFunction.getVariablesIndependientesDefecto();
+                string dependentName = Helper.UtilFunction.getVariableDependienteDefecto();
 
-            MultipleLinearRegressionAnalysis mlr = new MultipleLinearRegressionAnalysis(intercept: true)
-            {
-                Inputs = independentNames,
-                Output = dependentName
-            };
+                DataTable independent = sourceTable.DefaultView.ToTable(false, independentNames);
+                DataTable dependent = sourceTable.DefaultView.ToTable(false, dependentName);
 
-            // Compute the Linear Regression Analysis
-            MultipleLinearRegression reg = mlr.Learn(inputs, outputs);
+                inputs = independent.ToJagged();
+                outputs = dependent.Columns[dependentName].ToArray();
 
-            gvEstadistica.DataSource = mlr.Coefficients;
-            
-         //   var listaCoeficientes = mlr.Coefficients.ToList();
+                MultipleLinearRegressionAnalysis mlr = new MultipleLinearRegressionAnalysis(intercept: true)
+                {
+                    Inputs = independentNames,
+                    Output = dependentName
+                };
 
-          listaCoeficientes=  mlr.Coefficients.ToList();
-            
-            var coeficientes= mlr.CoefficientValues;
+                // Compute the Linear Regression Analysis
+                MultipleLinearRegression reg = mlr.Learn(inputs, outputs);
 
-            proceso = true;
-         //   listaRegistro = new List<RegistroBE>();
-         //   gvDatos.DataSource = listaRegistro;
+                gvEstadistica.DataSource = mlr.Coefficients;
+
+                //   var listaCoeficientes = mlr.Coefficients.ToList();
+
+                listaCoeficientes = mlr.Coefficients.ToList();
+
+                var coeficientes = mlr.CoefficientValues;
+
+                proceso = true;
+
+                MessageBox.Show("Se ejecuto el algoritmo correctamente", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            } catch (Exception ex) {
+
+                MessageBox.Show(ex.Message, "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+
         }
 
         private void leerCSV(string fileName) {
